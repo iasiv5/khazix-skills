@@ -4,11 +4,10 @@
 
 # 🧰 Khazix Skills
 
-#### A few AI skills and prompts I actually use every day, open-sourced as-is
+#### A few AI skills I actually use every day, open-sourced as-is
 
 [![License](https://img.shields.io/badge/License-MIT-3B82F6?style=for-the-badge)](./LICENSE)
-[![Skills](https://img.shields.io/badge/Skills-4-10B981?style=for-the-badge)](#-skills)
-[![Prompts](https://img.shields.io/badge/Prompts-1-F59E0B?style=for-the-badge)](#-prompts)
+[![Skills](https://img.shields.io/badge/Skills-6-10B981?style=for-the-badge)](#-skills)
 [![AgentSkills](https://img.shields.io/badge/AgentSkills-Standard-8B5CF6?style=for-the-badge)](https://agentskills.io)
 
 ![Claude Code](https://img.shields.io/badge/Claude_Code-Skill-D97706?style=flat-square&logo=anthropic&logoColor=white)
@@ -20,27 +19,19 @@
 
 Each one was running in my own projects long enough to prove it actually saves time before I bothered open-sourcing it. No hype — just a few useful things.
 
-- **Skills** — Structured instruction sets that agents load directly. Follows the [Agent Skills](https://agentskills.io) open standard. Works with Claude Code, Codex, OpenCode, and OpenClaw
-- **Prompts** — A single block of text you paste into ChatGPT / Claude / Gemini / any chat. No installation needed
+Every skill here is a structured instruction set that agents load directly. Follows the [Agent Skills](https://agentskills.io) open standard. Works with Claude Code, Codex, OpenCode, and OpenClaw.
 
 ---
 
 ## 📋 Index
 
-### Skills
-
 | Name | One-liner | Article |
 |---|---|---|
-| 🧹 [**neat-freak**](#-neat-freak) | After a session, run `/neat` to reconcile your project docs, CLAUDE.md, and agent memory with the code | [Article (Chinese)](https://mp.weixin.qq.com/s/tg1wd-iN2gWHWhXdY0faeg) |
-| 🔭 [**hv-analysis**](#-hv-analysis) | Drop a product/company/concept into it and get a 10k–30k word PDF research report | [Article (Chinese)](https://mp.weixin.qq.com/s/Y_uRMYBmdLWUPnz_ac7jWA) |
-| ✍️ [**khazix-writer**](#-khazix-writer) | Makes the agent write long-form Chinese articles in my personal voice | [Article (Chinese)](https://mp.weixin.qq.com/s/AtxGrii_K-nzkwUM9SNhEg) |
+| 💽 [**storage-analyzer**](#-storage-analyzer) | One sentence to scan your whole Mac / Windows drive — three-tier cleanup plan, one-click trash from the browser | [Article (Chinese)](https://mp.weixin.qq.com/s/NyOMIlOD986OC4SI9vmxlA) |
 | 🔥 [**aihot**](#-aihot-ai-hot-news-query) | Lets your agent pull AI HOT's daily report and all AI news from aihot.virxact.com with one Chinese sentence — no API key | [aihot.virxact.com](https://aihot.virxact.com) |
-
-### Prompts
-
-| Name | One-liner | Article |
-|---|---|---|
-| 🔭 [**hv-analysis (Prompt edition)**](#-hv-analysis-prompt-edition) | Lighter version of the skill above — paste it into any Deep Research model | [Article (Chinese)](https://mp.weixin.qq.com/s/Y_uRMYBmdLWUPnz_ac7jWA) |
+| 🧹 [**neat-freak**](#-neat-freak) | After a session, run `/neat` to reconcile your project docs, CLAUDE.md, and agent memory with the code | [Article (Chinese)](https://mp.weixin.qq.com/s/tg1wd-iN2gWHWhXdY0faeg) |
+| 🔭 [**hv-analysis**](#-hv-analysis-horizontal-vertical-analysis) | Drop a product/company/concept into it and get a 10k–30k word PDF research report | [Article (Chinese)](https://mp.weixin.qq.com/s/Y_uRMYBmdLWUPnz_ac7jWA) |
+| ✍️ [**khazix-writer**](#-khazix-writer) | Makes the agent write long-form Chinese articles in my personal voice | [Article (Chinese)](https://mp.weixin.qq.com/s/AtxGrii_K-nzkwUM9SNhEg) |
 
 ---
 
@@ -59,6 +50,88 @@ Replace `<skill-name>` with the one you want — e.g. `neat-freak`, `hv-analysis
 ## ✨ Skills
 
 <a id="-skills"></a>
+
+<table>
+<tr><td>
+
+### 💽 storage-analyzer
+
+> *"Cleaning Mac junk has been a CleanMyMac job for a decade. Now a single skill replaces it."*
+
+Tell your agent something like "check my storage" or "C: drive is full". It scans your whole disk and opens an **interactive HTML report** in your browser: disk overview, top 5 space hogs, prioritized cleanup, and a 🟢🟡🔴 three-tier list. Every command is one-click-copy; you can also click buttons to move to Trash / delete (always with a second confirmation dialog).
+
+**Why it beats CleanMyMac**
+
+CleanMyMac is a hard-coded program. It'll show you a 3.8 GB Chrome folder labeled "user cache, safe to delete" — but you don't know what's actually inside, which sites you'll log out of, which offline data will be gone.
+
+This skill is agent-driven. Every entry comes with **specific path + content classification + impact of deletion + recommended action**. That mysterious 97 GB UUID Container? It'll tell you it's the Bilibili offline video cache and suggest you clean it through the Bilibili app, not by hand.
+
+**Three-tier classification is the core**
+
+- 🟢 **Green** — Pure caches, temp files. Regenerate automatically. Safe for one-click cleanup
+- 🟡 **Yellow** — Contains user data (offline videos, downloads, project code). Only "Open in Finder" and (where safe) "Move to Trash". You decide
+- 🔴 **Red** — Running app core data, system files. Explains why not to touch, gives at most "Open folder". Never a delete button
+
+**Hard rules**
+
+Scan phase is **read-only**, period. Deletions require **two clicks** — button on the page, then a browser confirm dialog. The local server runs on 127.0.0.1 + random port + token, with three whitelists (green = can rm; yellow = trash only; both = open).
+
+**🌐 Cross-platform**: macOS fully tested; Windows code-ready (multi-drive supported), worth eyeballing on first run
+
+**How to trigger**
+
+```
+check my storage
+C drive is full
+clean up disk
+storage analysis
+帮我看看存储
+```
+
+→ [SKILL.md](./storage-analyzer/SKILL.md) · [Article (Chinese)](https://mp.weixin.qq.com/s/NyOMIlOD986OC4SI9vmxlA)
+
+</td></tr>
+</table>
+
+<table>
+<tr><td>
+
+### 🔥 aihot (AI HOT news query)
+
+> *"The AI world ships too much in a day. By the time I notice, it's already old news — let an agent scan it for me."*
+
+Lets any SKILL.md-supporting agent pull AI HOT's daily report and all AI news from [aihot.virxact.com](https://aihot.virxact.com) with one natural Chinese sentence. No API key, no MCP server config.
+
+**What it can do**
+
+- Pull today's or a specific date's AI HOT daily report (pre-packaged by topic)
+- Pull the selected items stream (daily editorial candidate pool)
+- Pull by category (models / products / industry / papers / tips)
+- Pull by time window (last N days)
+- Keyword / company / topic search ("recent OpenAI releases", "Sora-related", "RAG papers")
+
+**How to trigger** (Chinese — the underlying API is Chinese-curated)
+
+```
+今天 AI 圈有什么新东西
+看一下 5 月 6 号的 AI 日报
+最近一周的 AI 论文
+看下精选条目
+最近 OpenAI 有什么发布
+```
+
+**🌐 Cross-platform**: Claude Code · Codex CLI · Cursor · Gemini CLI · OpenCode · Cline · Windsurf
+
+**🇨🇳 China-friendly direct install** (no GitHub access needed):
+
+```
+curl -fsSL https://aihot.virxact.com/aihot-skill/install.sh | bash
+```
+
+→ [SKILL.md](./aihot/SKILL.md) · [aihot.virxact.com](https://aihot.virxact.com) · [Integration guide](https://aihot.virxact.com/agent)
+
+</td></tr>
+</table>
 
 <table>
 <tr><td>
@@ -167,73 +240,11 @@ You want "good general writing." This skill takes a position. It **refuses** cor
 </td></tr>
 </table>
 
-<table>
-<tr><td>
-
-### 🔥 aihot (AI HOT news query)
-
-> *"The AI world ships too much in a day. By the time I notice, it's already old news — let an agent scan it for me."*
-
-Lets any SKILL.md-supporting agent pull AI HOT's daily report and all AI news from [aihot.virxact.com](https://aihot.virxact.com) with one natural Chinese sentence. No API key, no MCP server config.
-
-**What it can do**
-
-- Pull today's or a specific date's AI HOT daily report (pre-packaged by topic)
-- Pull the selected items stream (daily editorial candidate pool)
-- Pull by category (models / products / industry / papers / tips)
-- Pull by time window (last N days)
-- Keyword / company / topic search ("recent OpenAI releases", "Sora-related", "RAG papers")
-
-**How to trigger** (Chinese — the underlying API is Chinese-curated)
-
-```
-今天 AI 圈有什么新东西
-看一下 5 月 6 号的 AI 日报
-最近一周的 AI 论文
-看下精选条目
-最近 OpenAI 有什么发布
-```
-
-**🌐 Cross-platform**: Claude Code · Codex CLI · Cursor · Gemini CLI · OpenCode · Cline · Windsurf
-
-**🇨🇳 China-friendly direct install** (no GitHub access needed):
-
-```
-curl -fsSL https://aihot.virxact.com/aihot-skill/install.sh | bash
-```
-
-→ [SKILL.md](./aihot/SKILL.md) · [aihot.virxact.com](https://aihot.virxact.com) · [Integration guide](https://aihot.virxact.com/agent)
-
-</td></tr>
-</table>
-
----
-
-## 📝 Prompts
-
-<a id="-prompts"></a>
-
-<table>
-<tr><td>
-
-### 🔭 hv-analysis (Prompt edition)
-
-A **lighter version** of the hv-analysis skill above — a single prompt you paste into any Deep Research model (ChatGPT Deep Research, Gemini Deep Research, Grok Deep Search, Claude Research). No installation required.
-
-About 30 minutes to a 10k+ word research report.
-
-Good for people who haven't picked up Claude Code / Codex yet but still want to try the method.
-
-→ [横纵分析法.md](./prompts/横纵分析法.md) · [Article (Chinese)](https://mp.weixin.qq.com/s/Y_uRMYBmdLWUPnz_ac7jWA)
-
-</td></tr>
-</table>
-
 ---
 
 ## 🌟 About
 
-I'm Khazix (数字生命卡兹克). Founder of Virxact. Background in visual communication design, with stints in user research and interaction design — **I'm not a programmer**. My day job is translating AI into things normal people can actually understand and use.
+I'm Khazix (数字生命卡兹克), founder of Virxact. I try to share fun, practical AI know-how — and may we always stay curious about the world.
 
 These skills are what I personally use every day. If they help you, a ⭐ is appreciated. Questions or suggestions welcome in Issues / Discussions.
 
